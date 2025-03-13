@@ -1,35 +1,35 @@
 package models;
 
 public class Room {
-    private int room_id;
-    private int room_number;
+    private int roomId;
+    private int roomNumber;
 
-    public Room(int room_id, int room_number) {
-        this.room_id = room_id;
-        this.room_number = room_number;
+    public Room(int room_id, int roomNumber) {
+        this.roomId = room_id;
+        this.roomNumber = roomNumber;
     }
 
-    public int getRoom_id() {
-        return room_id;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+    public void setRoomId(int roomId) {
+        this.roomId = this.roomId;
     }
 
-    public int getRoom_number() {
-        return room_number;
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoom_number(int room_number) {
-        this.room_number = room_number;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     @Override
     public String toString() {
         return "Room{" +
-                "room_id=" + room_id +
-                ", room_number='" + room_number + '\'' +
+                "room_id=" + roomId +
+                ", roomNumber='" + roomNumber + '\'' +
                 '}';
     }
 }

@@ -1,24 +1,24 @@
 package models;
 
 public class Teacher {
-    private int teacher_id;
+    private int teacherId;
     private String name;
-    private String second_name;
-    private String last_name;
+    private String secondName;
+    private String lastName;
 
-    public Teacher(int teacher_id, String name, String second_name, String last_name) {
-        this.teacher_id = teacher_id;
+    public Teacher(int teacherId, String name, String secondName, String lastName) {
+        this.teacherId = teacherId;
         this.name = name;
-        this.second_name = second_name;
-        this.last_name = last_name;
+        this.secondName = secondName;
+        this.lastName = lastName;
     }
 
-    public int getTeacher_id() {
-        return teacher_id;
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacher_id(int teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getName() {
@@ -29,29 +29,29 @@ public class Teacher {
         this.name = name;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
     public String toString() {
         return "model.Teacher{" +
-                "teacher_id=" + teacher_id +
+                "teacherId=" + teacherId +
                 ", name='" + name + '\'' +
-                ", second_name='" + second_name + '\'' +
-                ", last_name='" + last_name + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 '}';
     }
 }

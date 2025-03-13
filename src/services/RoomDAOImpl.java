@@ -39,7 +39,7 @@ public class RoomDAOImpl implements RoomDAO {
         while (resultSet.next()) {
             Room room = new Room(resultSet.getInt("room_id"),
                     resultSet.getInt("room_number"));
-            map.put(room.getRoom_id(), room);
+            map.put(room.getRoomId(), room);
         }
         return map;
     }

@@ -42,7 +42,7 @@ public class TeacherDAOImpl implements TeacherDAO {
                     resultSet.getString("name"),
                     resultSet.getString("second_name"),
                     resultSet.getString("last_name"));
-            map.put(teacher.getTeacher_id(), teacher);
+            map.put(teacher.getTeacherId(), teacher);
         }
         return map;
     }
