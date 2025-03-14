@@ -1,4 +1,3 @@
-import models.Room;
 import services.*;
 
 import java.sql.*;
@@ -8,6 +7,13 @@ public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ConnectionPoint connectionPoint = new ConnectionPoint();
         connectionPoint.openConnection();
+
+        TemplateDAO templateDAORoom = new TemplateDAORoomImpl(connectionPoint);
+        System.out.println(templateDAORoom.findById(1).toString());
+
+        TemplateDAO templateDAOTeacher = new TemplateDAOTeacherImpl(connectionPoint);
+        System.out.println(templateDAOTeacher.findById(1).toString());
+        System.out.println("-------------------------------------");
 
         RoomDAO roomDAO = new RoomDAOImpl(connectionPoint);
         TeacherDAO teacherDAO = new TeacherDAOImpl(connectionPoint);

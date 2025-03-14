@@ -19,8 +19,8 @@ public class RoomDAOImpl implements RoomDAO {
         connection = connectionPoint.getConnection();
     }
 
-    private static final String roomById = "SELECT room_id, room_number FROM class_rooms WHERE room_id = ?";
-    private static final String allRooms = "SELECT room_id, room_number FROM class_rooms";
+    public static final String roomById = "SELECT room_id, room_number FROM class_rooms WHERE room_id = ?";
+    public static final String allRooms = "SELECT room_id, room_number FROM class_rooms";
 
     @Override
     public Room getClassRoomById(int id) throws SQLException {
@@ -30,7 +30,6 @@ public class RoomDAOImpl implements RoomDAO {
         return new Room(resultSet.getInt("room_id"),
                 resultSet.getInt("room_number"));
     }
-
     @Override
     public Map<Integer, Room> getAllRooms() throws SQLException {
         Map<Integer,Room> map = new HashMap<>();
