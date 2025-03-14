@@ -11,6 +11,11 @@ public class TemplateDAOTeacherImpl extends TemplateDAO {
     }
 
     @Override
+    protected String setQueryAll() {
+        return "SELECT teacher_id, name, second_name, last_name FROM teachers";
+    }
+
+    @Override
     protected Teacher getResult(ResultSet resultSet) throws SQLException {
         return new Teacher(resultSet.getInt("teacher_id"),
                 resultSet.getString("name"),
@@ -19,7 +24,7 @@ public class TemplateDAOTeacherImpl extends TemplateDAO {
     }
 
     @Override
-    protected String setQuery() {
+    protected String setQueryId() {
         return "SELECT teacher_id, name, second_name, last_name FROM teachers WHERE teacher_id = ?";
     }
 }

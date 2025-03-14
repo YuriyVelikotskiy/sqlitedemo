@@ -1,6 +1,6 @@
 package models;
 
-public class Room {
+public class Room implements ModelHaveId {
     private int roomId;
     private int roomNumber;
 
@@ -9,7 +9,7 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public int getRoomId() {
+    public int getId() {
         return roomId;
     }
 

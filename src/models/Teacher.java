@@ -1,6 +1,6 @@
 package models;
 
-public class Teacher {
+public class Teacher implements ModelHaveId {
     private int teacherId;
     private String name;
     private String secondName;
@@ -13,7 +13,7 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public int getTeacherId() {
+    public int getId() {
         return teacherId;
     }
 

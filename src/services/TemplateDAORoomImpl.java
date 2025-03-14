@@ -11,13 +11,18 @@ public class TemplateDAORoomImpl extends TemplateDAO {
     }
 
     @Override
+    protected String setQueryAll() {
+        return "SELECT room_id, room_number FROM class_rooms";
+    }
+
+    @Override
     protected Room getResult(ResultSet resultSet) throws SQLException {
         return new Room(resultSet.getInt("room_id"),
                 resultSet.getInt("room_number"));
     }
 
     @Override
-    protected String setQuery() {
+    protected String setQueryId() {
        return "SELECT room_id, room_number FROM class_rooms WHERE room_id = ?";
     }
 }

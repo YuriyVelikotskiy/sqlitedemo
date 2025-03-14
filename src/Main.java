@@ -24,12 +24,12 @@ public class Main {
         System.out.println(teacherDAO.getTeacherById(5).toString());
         System.out.println("-------------------------------------");
 
-        Map map = new RoomDAOImpl(connectionPoint).getAllRooms();
+        Map map = new TemplateDAORoomImpl(connectionPoint).getAll();
         for (int i =1;i <= map.size();i++){
             System.out.println(map.get(i));
         }
 
-        Map mapT = new TeacherDAOImpl(connectionPoint).getAllTeachers();
+        Map mapT = new TemplateDAOTeacherImpl(connectionPoint).getAll();
         for (int i =1;i <= mapT.size();i++){
             System.out.println(mapT.get(i));
         }
