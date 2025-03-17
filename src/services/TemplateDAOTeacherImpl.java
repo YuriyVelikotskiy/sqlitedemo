@@ -2,8 +2,10 @@ package services;
 
 import models.Teacher;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class TemplateDAOTeacherImpl extends TemplateDAO {
     public TemplateDAOTeacherImpl(ConnectionPoint connectionPoint) {
@@ -11,7 +13,12 @@ public class TemplateDAOTeacherImpl extends TemplateDAO {
     }
 
     @Override
-    protected String setQueryAll() {
+    protected <T> void createStatement(PreparedStatement statement, T inPut) throws SQLException {
+
+    }
+
+    @Override
+    protected String getAllQuery() {
         return "SELECT teacher_id, name, second_name, last_name FROM teachers";
     }
 
@@ -24,7 +31,12 @@ public class TemplateDAOTeacherImpl extends TemplateDAO {
     }
 
     @Override
-    protected String setQueryId() {
+    protected String getIdQuery() {
         return "SELECT teacher_id, name, second_name, last_name FROM teachers WHERE teacher_id = ?";
+    }
+
+    @Override
+    protected String createQuery() {
+        return "INSERT INTO teachers ( name, second_name, last_name ) VALUES ( ?, ?, ? )";
     }
 }

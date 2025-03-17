@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class Teacher implements ModelHaveId {
     private int teacherId;
     private String name;
@@ -15,10 +17,6 @@ public class Teacher implements ModelHaveId {
 
     public int getId() {
         return teacherId;
-    }
-
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
     }
 
     public String getName() {
@@ -47,11 +45,24 @@ public class Teacher implements ModelHaveId {
 
     @Override
     public String toString() {
-        return "model.Teacher{" +
+        return "Teacher{" +
                 "teacherId=" + teacherId +
                 ", name='" + name + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(name, teacher.name) && Objects.equals(secondName, teacher.secondName) && Objects.equals(lastName, teacher.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, secondName, lastName);
     }
 }

@@ -2,8 +2,10 @@ package services;
 
 import models.Room;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class TemplateDAORoomImpl extends TemplateDAO {
     public TemplateDAORoomImpl(ConnectionPoint connectionPoint) {
@@ -11,7 +13,13 @@ public class TemplateDAORoomImpl extends TemplateDAO {
     }
 
     @Override
-    protected String setQueryAll() {
+    protected <T> void createStatement(PreparedStatement statement, T inPut) throws SQLException {
+        Room room = (Room) inPut;
+        statement.setObject(1, ((Room) inPut).getRoomNumber());
+    }
+
+    @Override
+    protected String getAllQuery() {
         return "SELECT room_id, room_number FROM class_rooms";
     }
 
@@ -22,7 +30,12 @@ public class TemplateDAORoomImpl extends TemplateDAO {
     }
 
     @Override
-    protected String setQueryId() {
+    protected String getIdQuery() {
        return "SELECT room_id, room_number FROM class_rooms WHERE room_id = ?";
+    }
+
+    @Override
+    protected String createQuery() {
+        return "INSERT INTO class_rooms ( room_number ) VALUES ( ? )";
     }
 }

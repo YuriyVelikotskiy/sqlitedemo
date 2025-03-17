@@ -1,6 +1,8 @@
+import models.Room;
 import services.*;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -15,25 +17,20 @@ public class Main {
         System.out.println(templateDAOTeacher.findById(1).toString());
         System.out.println("-------------------------------------");
 
-        RoomDAO roomDAO = new RoomDAOImpl(connectionPoint);
-        TeacherDAO teacherDAO = new TeacherDAOImpl(connectionPoint);
-        System.out.println(teacherDAO.getTeacherById(1).toString());
-        System.out.println(teacherDAO.getTeacherById(2).toString());
-        System.out.println(teacherDAO.getTeacherById(3).toString());
-        System.out.println(teacherDAO.getTeacherById(4).toString());
-        System.out.println(teacherDAO.getTeacherById(5).toString());
-        System.out.println("-------------------------------------");
+        TemplateDAO newRoom = new TemplateDAORoomImpl(connectionPoint);
+        newRoom.create(new Room(666));
 
-        Map map = new TemplateDAORoomImpl(connectionPoint).getAll();
-        for (int i =1;i <= map.size();i++){
-            System.out.println(map.get(i));
+        List list = new TemplateDAORoomImpl(connectionPoint).getAll();
+        for (int i = 0;i < list.size();i++){
+                System.out.println(list.get(i));
         }
 
-        Map mapT = new TemplateDAOTeacherImpl(connectionPoint).getAll();
-        for (int i =1;i <= mapT.size();i++){
-            System.out.println(mapT.get(i));
-        }
 
+
+        List listT = new TemplateDAOTeacherImpl(connectionPoint).getAll();
+        for (int i =0;i < listT.size();i++){
+            System.out.println(listT.get(i));
+        }
 
         connectionPoint.closeConnection();
     }
