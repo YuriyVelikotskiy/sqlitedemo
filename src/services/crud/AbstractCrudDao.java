@@ -1,4 +1,6 @@
-package services;
+package services.crud;
+
+import services.ConnectionPoint;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,14 +9,14 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class CrudDao<T, K extends Number> {
+public abstract class AbstractCrudDao<T, K extends Number> {
 
     private Connection connection;
     private String table;
     private final List<String> fields = new ArrayList<>();
     private String selectSql;
 
-    public CrudDao(
+    public AbstractCrudDao(
             ConnectionPoint connectionPoint,
             String aTable,
             String... aFields
