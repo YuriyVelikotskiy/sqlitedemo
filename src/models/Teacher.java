@@ -8,6 +8,12 @@ public class Teacher implements ModelHaveId {
     private String secondName;
     private String lastName;
 
+    public Teacher(String name, String secondName, String lastName) {
+        this.name = name;
+        this.secondName = secondName;
+        this.lastName = lastName;
+    }
+
     public Teacher(int teacherId, String name, String secondName, String lastName) {
         this.teacherId = teacherId;
         this.name = name;

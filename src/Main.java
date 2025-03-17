@@ -1,4 +1,5 @@
 import models.Room;
+import models.Teacher;
 import services.*;
 
 import java.sql.*;
@@ -19,6 +20,8 @@ public class Main {
 
         TemplateDAO newRoom = new TemplateDAORoomImpl(connectionPoint);
         newRoom.create(new Room(666));
+        TemplateDAO newTeacher = new TemplateDAOTeacherImpl(connectionPoint);
+        newTeacher.create(new Teacher("Юрий","Юрьевич","Юрьев"));
 
         List list = new TemplateDAORoomImpl(connectionPoint).getAll();
         for (int i = 0;i < list.size();i++){

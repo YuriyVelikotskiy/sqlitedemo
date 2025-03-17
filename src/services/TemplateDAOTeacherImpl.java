@@ -14,7 +14,10 @@ public class TemplateDAOTeacherImpl extends TemplateDAO {
 
     @Override
     protected <T> void createStatement(PreparedStatement statement, T inPut) throws SQLException {
-
+        Teacher teacher = (Teacher) inPut;
+        statement.setObject(1, teacher.getName());
+        statement.setObject(2,teacher.getSecondName());
+        statement.setObject(3,teacher.getLastName());
     }
 
     @Override

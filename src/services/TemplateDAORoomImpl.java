@@ -15,7 +15,7 @@ public class TemplateDAORoomImpl extends TemplateDAO {
     @Override
     protected <T> void createStatement(PreparedStatement statement, T inPut) throws SQLException {
         Room room = (Room) inPut;
-        statement.setObject(1, ((Room) inPut).getRoomNumber());
+        statement.setObject(1, room.getRoomNumber());
     }
 
     @Override
