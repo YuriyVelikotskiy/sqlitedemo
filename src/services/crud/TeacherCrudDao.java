@@ -30,9 +30,11 @@ public class TeacherCrudDao extends AbstractCrudDao<Teacher, Integer> {
     protected List<String> getValues(Teacher record) {
         return Stream.of(
                 Integer.toString(record.getId()),
-                record.getName(),
-                record.getSecondName(),
-                record.getLastName()
+                quoted(record.getName()),
+                quoted(record.getSecondName()),
+                quoted(record.getLastName())
         ).toList();
     }
+
+    private String quoted(String string) { return "'" + string + "'"; }
 }
