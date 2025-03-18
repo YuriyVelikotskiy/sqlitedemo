@@ -42,20 +42,23 @@ public abstract class TemplateDAO<R, K> {
 
     public void create(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareCreate(record));
-        statement.executeUpdate();
-        System.out.println("Запись "+ record.toString() +" создана!!!");
+        ResultSet resultSet = statement.executeQuery();
+        System.out.println("Запись "+ getRecord(resultSet).toString() +" создана!!!");
+        resultSet.close();
     }
 
     public void update(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareUpdate(record));
-        statement.executeUpdate();
-        System.out.println("Запись "+ record.toString() +" обнавлена!!!");
+        ResultSet resultSet = statement.executeQuery();
+        System.out.println("Запись "+ getRecord(resultSet).toString() +" обнавлена!!!");
+        resultSet.close();
     }
 
     public void delete(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareDelete(record));
-        statement.executeUpdate();
-        System.out.println("Запись "+ record.toString() +" удалена!!!");
+        ResultSet resultSet = statement.executeQuery();
+        System.out.println("Запись "+ getRecord(resultSet).toString() +" удалена!!!");
+        resultSet.close();
     }
 
     private String prepareSelectById(String id) {
@@ -90,7 +93,7 @@ public abstract class TemplateDAO<R, K> {
         return "where ".concat(fields.get(0)).concat(" = ").concat(id);
     }
     private static final String SELECT = "select %s from %s";
-    private static final String CREATE = "insert into %s (%s) values (%s)";
-    private static final String UPDATE = "update %s set %s %s";
-    private static final String DELETE = "delete from %s %s";
+    private static final String CREATE = "insert into %s (%s) values (%s) returning *";
+    private static final String UPDATE = "update %s set %s %s returning *";
+    private static final String DELETE = "delete from %s %s returning *";
 }
