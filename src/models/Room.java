@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Room implements ModelHaveId {
+public class Room {
     private int roomId;
     private int roomNumber;
 

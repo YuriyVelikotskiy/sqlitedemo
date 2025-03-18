@@ -1,64 +1,96 @@
 package services;
 
-import models.ModelHaveId;
-import models.Room;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public abstract class TemplateDAO {
+public abstract class TemplateDAO<R, K> {
+    private final Connection connection;
+    private final String name;
+    private final List<String> fields;
 
-    Connection connection;
-
-    public TemplateDAO(ConnectionPoint connectionPoint) {
-        connection = connectionPoint.getConnection();
+    public TemplateDAO(ConnectionPoint connectionPoint, String nameOfTable, List<String> namesOfFields) {
+        this.connection = connectionPoint.getConnection();
+        this.name = nameOfTable;
+        this.fields = namesOfFields;
     }
 
-    public final <T> T findById(int id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(getIdQuery());
-        statement.setInt(1, id);
+    protected abstract R getRecord(ResultSet resultSet) throws SQLException;
+
+    protected abstract List<String> getValue(R record);
+
+    public R findById(K id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(prepareSelectById(id.toString()));
         ResultSet resultSet = statement.executeQuery();
-        return getResult(resultSet);
+        return getRecord(resultSet);
     }
 
-    public final List getAll() throws SQLException {
-        List list = new ArrayList<>();
-        PreparedStatement statement = connection.prepareStatement(getAllQuery());
+    public List<R> findAll() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(prepareSelectAll());
         ResultSet resultSet = statement.executeQuery();
+        List<R> result = new ArrayList<>();
         while (resultSet.next()) {
-            ModelHaveId result = getResult(resultSet);
-            list.add(result);
+            result.add(getRecord(resultSet));
         }
-        return list;
+        return result;
     }
 
-    public final <T> void create(T inPut) throws SQLException {
-        List list = getAll();
-        boolean isInTable = false;
-        for (Object i : list) {
-            if (i.equals(inPut)) {
-                isInTable = true;
-                break;
-            }
-        }
-        if (!isInTable) {
-            PreparedStatement statement = connection.prepareStatement(createQuery());
-            createStatement(statement, inPut);
-            statement.executeUpdate();
-            System.out.println("Объект " + inPut.toString() + " добавлен!!!");
-        } else {
-            System.out.println("Объект " + inPut.toString() + " уже есть в таблице!!!");
-        }
+    public void create(R record) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(prepareCreate(record));
+        statement.executeUpdate();
+        System.out.println("Запись "+ record.toString() +" создана!!!");
     }
 
-    protected abstract <T> void createStatement(PreparedStatement statement, T inPut) throws SQLException;
+    public void update(R record) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(prepareUpdate(record));
+        statement.executeUpdate();
+        System.out.println("Запись "+ record.toString() +" обнавлена!!!");
+    }
 
-    protected abstract <T> T getResult(ResultSet resultSet) throws SQLException;
+    public void delete(R record) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(prepareDelete(record));
+        statement.executeUpdate();
+        System.out.println("Запись "+ record.toString() +" удалена!!!");
+    }
 
-    protected abstract String getAllQuery();
+    private String prepareSelectById(String id) {
+        return prepareSelectAll().concat(" WHERE ").concat(fields.get(0)).concat("= ").concat(id);
+    }
 
-    protected abstract String getIdQuery();
+    private String prepareSelectAll() {
+        return String.format(SELECT, String.join(", ", fields), name);
+    }
 
-    protected abstract String createQuery();
+    private String prepareCreate(R record) {
+        String prepareFields = String.join(", ", fields.subList(1, fields.size()));
+        String prepareValues = String.join(", ", getValue(record).subList(1, fields.size()));
+        return String.format(CREATE, name, prepareFields, prepareValues);
+    }
+
+    private String prepareUpdate(R record) {
+        List<String> prepareValues = getValue(record);
+        Iterator<String> iteratorValues = prepareValues.iterator();
+        String prepare = fields.stream()
+                .map(f -> f + " = '" + iteratorValues.next() + "'")
+                .skip(1)
+                .collect(Collectors.joining(", "));
+        return String.format(UPDATE, name, prepare, prepareWhereId(prepareValues.get(0)));
+    }
+
+    private String prepareDelete(R record) {
+        List<String> prepareValues = getValue(record);
+        return String.format(DELETE, name, prepareWhereId(prepareValues.get(0)));
+    }
+    private String prepareWhereId(String id){
+        return "where ".concat(fields.get(0)).concat(" = ").concat(id);
+    }
+    private static final String SELECT = "select %s from %s";
+    private static final String CREATE = "insert into %s (%s) values (%s)";
+    private static final String UPDATE = "update %s set %s %s";
+    private static final String DELETE = "delete from %s %s";
 }

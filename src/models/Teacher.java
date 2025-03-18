@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Teacher implements ModelHaveId {
+public class Teacher {
     private int teacherId;
     private String name;
     private String secondName;
