@@ -1,6 +1,5 @@
 package services;
 
-import models.Room;
 import models.Teacher;
 
 import java.sql.ResultSet;
@@ -28,7 +27,7 @@ public class TeacherDAOImpl extends TemplateDAO<Teacher, Integer> {
 
     @Override
     protected List<String> getValue(Teacher record) {
-        return Arrays.asList(String.valueOf(record.getId()),
+        return Arrays.asList(String.valueOf(record.getTeacherId()),
                 String.valueOf(record.getName()),
                 String.valueOf(record.getSecondName()),
                 String.valueOf(record.getLastName()));

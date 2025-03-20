@@ -25,6 +25,7 @@ public class RoomDAOImpl extends TemplateDAO<Room, Integer> {
 
     @Override
     protected List<String> getValue(Room record) {
-        return Arrays.asList(String.valueOf(record.getId()), String.valueOf(record.getRoomNumber()));
+        return Arrays.asList(String.valueOf(record.getRoomId()),
+                String.valueOf(record.getRoomNumber()));
     }
 }

@@ -21,7 +21,7 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public long getId() {
+    public long getTeacherId() {
         return teacherId;
     }
 

@@ -5,16 +5,16 @@ import java.util.Objects;
 public class Group {
     private long groupId;
     private int groupYear;
-    private char groupLetter;
+    private String groupLetter;
     private int groupGrade;
 
-    public Group(int groupYear, char groupLetter, int groupGrade) {
+    public Group(int groupYear, String groupLetter, int groupGrade) {
         this.groupYear = groupYear;
         this.groupLetter = groupLetter;
         this.groupGrade = groupGrade;
     }
 
-    public Group(long groupId, int groupYear, char groupLetter, int groupGrade) {
+    public Group(long groupId, int groupYear, String groupLetter, int groupGrade) {
         this.groupId = groupId;
         this.groupYear = groupYear;
         this.groupLetter = groupLetter;
@@ -37,11 +37,11 @@ public class Group {
         this.groupYear = groupYear;
     }
 
-    public char getGroupLetter() {
+    public String getGroupLetter() {
         return groupLetter;
     }
 
-    public void setGroupLetter(char groupLetter) {
+    public void setGroupLetter(String groupLetter) {
         this.groupLetter = groupLetter;
     }
 
@@ -68,7 +68,7 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return groupYear == group.groupYear && groupLetter == group.groupLetter && groupGrade == group.groupGrade;
+        return groupYear == group.groupYear && groupGrade == group.groupGrade && Objects.equals(groupLetter, group.groupLetter);
     }
 
     @Override
