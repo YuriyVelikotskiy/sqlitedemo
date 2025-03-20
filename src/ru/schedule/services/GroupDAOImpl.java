@@ -1,7 +1,6 @@
-package services;
+package ru.schedule.services;
 
-import models.Group;
-import models.Room;
+import ru.schedule.models.Group;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
