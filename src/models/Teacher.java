@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class Teacher {
-    private int teacherId;
+    private long teacherId;
     private String name;
     private String secondName;
     private String lastName;
@@ -14,14 +14,14 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public Teacher(int teacherId, String name, String secondName, String lastName) {
+    public Teacher(long teacherId, String name, String secondName, String lastName) {
         this.teacherId = teacherId;
         this.name = name;
         this.secondName = secondName;
         this.lastName = lastName;
     }
 
-    public int getId() {
+    public long getId() {
         return teacherId;
     }
 

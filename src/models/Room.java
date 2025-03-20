@@ -3,19 +3,19 @@ package models;
 import java.util.Objects;
 
 public class Room {
-    private int roomId;
+    private long roomId;
     private int roomNumber;
 
     public Room(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 
-    public Room(int room_id, int roomNumber) {
+    public Room(long room_id, int roomNumber) {
         this.roomId = room_id;
         this.roomNumber = roomNumber;
     }
 
-    public int getId() {
+    public long getId() {
         return roomId;
     }
 

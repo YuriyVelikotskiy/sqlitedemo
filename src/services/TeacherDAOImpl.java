@@ -20,13 +20,11 @@ public class TeacherDAOImpl extends TemplateDAO<Teacher, Integer> {
 
     @Override
     protected Teacher getRecord(ResultSet resultSet) throws SQLException {
-        return new Teacher(resultSet.getInt(fieldsOfTable.get(0)),
+        return new Teacher(resultSet.getLong(fieldsOfTable.get(0)),
                 resultSet.getString(fieldsOfTable.get(1)),
                 resultSet.getString(fieldsOfTable.get(2)),
                 resultSet.getString(fieldsOfTable.get(3)));
     }
-
-
 
     @Override
     protected List<String> getValue(Teacher record) {

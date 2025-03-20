@@ -19,7 +19,7 @@ public class RoomDAOImpl extends TemplateDAO<Room, Integer> {
 
     @Override
     protected Room getRecord(ResultSet resultSet) throws SQLException {
-        return new Room(resultSet.getInt(fieldsOfTable.get(0)),
+        return new Room(resultSet.getLong(fieldsOfTable.get(0)),
                 resultSet.getInt(fieldsOfTable.get(1)));
     }
 
