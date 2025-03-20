@@ -1,4 +1,7 @@
-package services;
+package ru.schedule.services;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +16,8 @@ public abstract class TemplateDAO<R, K> {
     private final Connection connection;
     private final String name;
     private final List<String> fields;
+
+    Logger logger = LoggerFactory.getLogger("ru.schedule.services.DAO");
 
     public TemplateDAO(ConnectionPoint connectionPoint, String nameOfTable, List<String> namesOfFields) {
         this.connection = connectionPoint.getConnection();
@@ -43,21 +48,21 @@ public abstract class TemplateDAO<R, K> {
     public void create(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareCreate(record));
         ResultSet resultSet = statement.executeQuery();
-        System.out.println("Запись "+ getRecord(resultSet).toString() +" создана!!!");
+        logger.debug("Запись {} создана!!!", getRecord(resultSet).toString());
         resultSet.close();
     }
 
     public void update(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareUpdate(record));
         ResultSet resultSet = statement.executeQuery();
-        System.out.println("Запись "+ getRecord(resultSet).toString() +" обнавлена!!!");
+        logger.debug("Запись {} обнавлена!!!", getRecord(resultSet).toString());
         resultSet.close();
     }
 
     public void delete(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareDelete(record));
         ResultSet resultSet = statement.executeQuery();
-        System.out.println("Запись "+ getRecord(resultSet).toString() +" удалена!!!");
+        logger.debug("Запись {} удалена!!!!!!", getRecord(resultSet).toString());
         resultSet.close();
     }
 

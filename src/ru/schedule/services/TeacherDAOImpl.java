@@ -1,6 +1,6 @@
-package services;
+package ru.schedule.services;
 
-import models.Teacher;
+import ru.schedule.models.Teacher;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

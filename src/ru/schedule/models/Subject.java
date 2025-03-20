@@ -1,4 +1,4 @@
-package models;
+package ru.schedule.models;
 
 import java.util.Objects;
 

@@ -1,11 +1,18 @@
-import models.Room;
-import services.*;
+package ru.schedule;
+
+import ru.schedule.models.Room;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.schedule.services.*;
 
 import java.sql.*;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+        Logger logger = LoggerFactory.getLogger("ru.schedule");
+
         ConnectionPoint connectionPoint = new ConnectionPoint();
         connectionPoint.openConnection();
 
@@ -22,6 +29,7 @@ public class Main {
         }
 
         connectionPoint.closeConnection();
+
     }
 }
 
