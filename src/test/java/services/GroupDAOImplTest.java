@@ -1,8 +1,6 @@
 package services;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.schedule.models.Room;
 import ru.schedule.services.ConnectionPoint;
 import ru.schedule.services.RoomDAOImpl;
@@ -43,6 +41,28 @@ public class GroupDAOImplTest {
         rooms.add(new Room(2,222));
         rooms.add(new Room(3,666));
         assertEquals(rooms,crudDAOTemplate.findAll());
+    }
+
+    @Test
+    void creatTest() throws SQLException {
+        crudDAOTemplate.create(new Room(777));
+        assertEquals(new Room(4,777),crudDAOTemplate.findById(4));
+        crudDAOTemplate.delete(new Room(4,777));
+    }
+
+    @Test
+    void updateTest() throws SQLException {
+        crudDAOTemplate.create(new Room(777));
+        crudDAOTemplate.update(new Room(4,888));
+        assertEquals(new Room(4,888),crudDAOTemplate.findById(4));
+        crudDAOTemplate.delete(new Room(4,777));
+    }
+
+    @Test
+    void deleteTest() throws SQLException {
+        crudDAOTemplate.create(new Room(777));
+        crudDAOTemplate.delete(new Room(4,777));
+        assertNotEquals(new Room(4,777),crudDAOTemplate.findById(4));
     }
 
     @AfterAll
