@@ -14,11 +14,11 @@ public class ConnectionPoint {
     public Connection getConnection() {
         return connection;
     }
-    public void openConnection() throws ClassNotFoundException, SQLException {
+    public void openConnection(String url) throws ClassNotFoundException, SQLException {
         connection = null;
         logger.info("Установка подключения!!!");
         Class.forName("org.sqlite.JDBC");
-        connection = DriverManager.getConnection("jdbc:sqlite:src\\main\\resources\\School.db");
+        connection = DriverManager.getConnection(url);
         if (connection != null) {
             logger.info("Подключение установлено!!!");
         }
