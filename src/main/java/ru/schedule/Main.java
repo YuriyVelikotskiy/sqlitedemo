@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
         Logger logger = LoggerFactory.getLogger("ru.schedule");
         String url = "jdbc:sqlite:src\\main\\resources\\School.db";
         ConnectionPoint connectionPoint = new ConnectionPoint();
