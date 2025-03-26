@@ -29,7 +29,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" + "room_id=" + roomId + ", roomNumber='" + roomNumber + '\'' + '}';
+        return String.valueOf(roomNumber);
     }
 
     @Override

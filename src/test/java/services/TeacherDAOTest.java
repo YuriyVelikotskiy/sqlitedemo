@@ -32,41 +32,41 @@ public class TeacherDAOTest {
 
     @Test
     void findByIdTest() throws SQLException {
-        assertEquals(new Teacher(1,"Yuriy", "Yurievich", "Yuriev"),crudDAOTemplate.findById(1));
-        assertEquals(new Teacher(2,"Andrey", "Andreevich", "Andreev"),crudDAOTemplate.findById(2));
-        assertEquals(new Teacher(3,"Maxim", "Maxievich", "Maximov"),crudDAOTemplate.findById(3));
-        assertNotEquals(new Teacher(3,"Maxim", "Maxievich", "Maximov"),crudDAOTemplate.findById(1));
+        assertEquals(new Teacher(1, "Yuriy", "Yurievich", "Yuriev"), crudDAOTemplate.findById(1));
+        assertEquals(new Teacher(2, "Andrey", "Andreevich", "Andreev"), crudDAOTemplate.findById(2));
+        assertEquals(new Teacher(3, "Maxim", "Maxievich", "Maximov"), crudDAOTemplate.findById(3));
+        assertNotEquals(new Teacher(3, "Maxim", "Maxievich", "Maximov"), crudDAOTemplate.findById(1));
     }
 
     @Test
     void findAllTest() throws SQLException {
         List<Teacher> rooms = new ArrayList<>();
-        rooms.add(new Teacher(1,"Yuriy", "Yurievich", "Yuriev"));
-        rooms.add(new Teacher(2,"Andrey", "Andreevich", "Andreev"));
-        rooms.add(new Teacher(3,"Maxim", "Maxievich", "Maximov"));
-        assertEquals(rooms,crudDAOTemplate.findAll());
+        rooms.add(new Teacher(1, "Yuriy", "Yurievich", "Yuriev"));
+        rooms.add(new Teacher(2, "Andrey", "Andreevich", "Andreev"));
+        rooms.add(new Teacher(3, "Maxim", "Maxievich", "Maximov"));
+        assertEquals(rooms, crudDAOTemplate.findAll());
     }
 
     @Test
     void creatTest() throws SQLException {
-        crudDAOTemplate.create(new Teacher(4,"Raxim", "Raxievich", "Raximov"));
-        assertEquals(new Teacher(4,"Raxim", "Raxievich", "Raximov"),crudDAOTemplate.findById(4));
-        crudDAOTemplate.delete(new Teacher(4,"Raxim", "Raxievich", "Raximov"));
+        crudDAOTemplate.create(new Teacher(4, "Raxim", "Raxievich", "Raximov"));
+        assertEquals(new Teacher(4, "Raxim", "Raxievich", "Raximov"), crudDAOTemplate.findById(4));
+        crudDAOTemplate.delete(new Teacher(4, "Raxim", "Raxievich", "Raximov"));
     }
 
     @Test
     void updateTest() throws SQLException {
-        crudDAOTemplate.create(new Teacher(4,"Raxim", "Raxievich", "Raximov"));
-        crudDAOTemplate.update(new Teacher(4,"Taxim", "Taxievich", "Taximov"));
-        assertEquals(new Teacher(4,"Taxim", "Taxievich", "Taximov"),crudDAOTemplate.findById(4));
-        crudDAOTemplate.delete(new Teacher(4,"Taxim", "Taxievich", "Taximov"));
+        crudDAOTemplate.create(new Teacher(4, "Raxim", "Raxievich", "Raximov"));
+        crudDAOTemplate.update(new Teacher(4, "Taxim", "Taxievich", "Taximov"));
+        assertEquals(new Teacher(4, "Taxim", "Taxievich", "Taximov"), crudDAOTemplate.findById(4));
+        crudDAOTemplate.delete(new Teacher(4, "Taxim", "Taxievich", "Taximov"));
     }
 
     @Test
     void deleteTest() throws SQLException {
-        crudDAOTemplate.create(new Teacher(4,"Raxim", "Raxievich", "Raximov"));
-        crudDAOTemplate.delete(new Teacher(4,"Raxim", "Raxievich", "Raximov"));
-        assertNotEquals(new Teacher(4,"Raxim", "Raxievich", "Raximov"),crudDAOTemplate.findById(4));
+        crudDAOTemplate.create(new Teacher(4, "Raxim", "Raxievich", "Raximov"));
+        crudDAOTemplate.delete(new Teacher(4, "Raxim", "Raxievich", "Raximov"));
+        assertNotEquals(new Teacher(4, "Raxim", "Raxievich", "Raximov"), crudDAOTemplate.findById(4));
     }
 
     @AfterAll
