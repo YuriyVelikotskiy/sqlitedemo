@@ -62,7 +62,7 @@ public abstract class TemplateDAO<R, K> {
     public void delete(R record) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(prepareDelete(record));
         ResultSet resultSet = statement.executeQuery();
-        logger.debug("Запись {} удалена!!!!!!", getRecord(resultSet).toString());
+        logger.debug("Запись {} удалена!!!", getRecord(resultSet).toString());
         resultSet.close();
     }
 
@@ -76,7 +76,7 @@ public abstract class TemplateDAO<R, K> {
 
     private String prepareCreate(R record) {
         String prepareFields = String.join(", ", fields.subList(1, fields.size()));
-        String prepareValues = String.join(", ", getValue(record).subList(1, fields.size()));
+        String prepareValues = String.join("', '", getValue(record).subList(1, fields.size()));
         return String.format(CREATE, name, prepareFields, prepareValues);
     }
 
@@ -98,7 +98,7 @@ public abstract class TemplateDAO<R, K> {
         return "where ".concat(fields.get(0)).concat(" = ").concat(id);
     }
     private static final String SELECT = "select %s from %s";
-    private static final String CREATE = "insert into %s (%s) values (%s) returning *";
+    private static final String CREATE = "insert into %s (%s) values ('%s') returning *";
     private static final String UPDATE = "update %s set %s %s returning *";
     private static final String DELETE = "delete from %s %s returning *";
 }

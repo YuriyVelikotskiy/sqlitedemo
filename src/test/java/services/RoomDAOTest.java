@@ -13,10 +13,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class GroupDAOImplTest {
+public class RoomDAOTest {
 
     private static ConnectionPoint connectionPoint;
-    static TemplateDAO<Room, Integer> crudDAOTemplate;
+    private static TemplateDAO<Room, Integer> crudDAOTemplate;
 
     @BeforeAll
     static void setup() throws SQLException, ClassNotFoundException {
@@ -24,6 +24,9 @@ public class GroupDAOImplTest {
         connectionPoint = new ConnectionPoint();
         connectionPoint.openConnection(url);
         crudDAOTemplate = new RoomDAOImpl(connectionPoint);
+        crudDAOTemplate.create(new Room(1,111));
+        crudDAOTemplate.create(new Room(2,222));
+        crudDAOTemplate.create(new Room(3,666));
     }
 
     @Test
@@ -67,6 +70,9 @@ public class GroupDAOImplTest {
 
     @AfterAll
     static void tear() throws SQLException {
+        crudDAOTemplate.delete(new Room(1,111));
+        crudDAOTemplate.delete(new Room(2,222));
+        crudDAOTemplate.delete(new Room(3,666));
         connectionPoint.closeConnection();
     }
 }
